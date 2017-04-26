@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block extra_head %}
+<script src="/static/js/commerceMarket.js"></script>
+<script>
+var data = [];  
+var neighborhoods = [];
+var MEDIA_URL = "{{MEDIA_URL}}";
+{% for commerce in commerces %}
+data.push({
+name : "{{ commerce.name }}",
+pk : "{{ commerce.pk }}",
+description : `{{ commerce.description }}`,
+image : "{{ commerce.image }}",
+category : "{{ commerce.category.pk}}",
+phone : "{{ commerce.phone }}"
+
+})
+{% endfor%}
+var categories = [{ "name" : "todas las categorias", "pk" : 0, "selected" : true}];
+
+{% for category in categories %}
+categories.push({
+        "name" : "{{ category.name }}",
+        "description" : `{{ category.description }}`,
+        "pk" : "{{ category.pk }}"
+        })
+{% endfor %}
+</script>
+{% endblock %}
+{% block content %}
+{% for commerce in commerces %}
+<!-- Modal Structure -->
+<div id="modal{{commerce.pk}}" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col m6">
+                <h4 style="text-align:center;">{{ commerce.name }}</h4>
+                <img src="{{MEDIA_URL}}{{commerce.image }}" alt="" height="200px" style="display:block;margin:0 auto;">
+            </div>
+            <div class="col m6">
+                <h4>Descripción:</h4>
+                <p style="display:block; margin: 0 auto;">{{ commerce.description }}</p>
+                <h4>Dirección: </h4>
+                <span>{{ commerce.address}}</span>
+                <h4>Telefonos:</h4>
+                <span>{{ commerce.phone }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+</div>
+{% endfor %}
+
+{%  verbatim %}
+<div class="">
+    <div class="row"> 
+        <div class="col s12 m2" style="padding-top:5%;">
+            <label for="">Categorias</label>
+            <ul action="#">
+                <li ng-repeat="category in market.categories">
+                <input type="checkbox" id="{{category.pk}}"  ng-change="market.filter(category)" ng-model="category.selected"/>
+                <label for="{{ category.pk }}">{{ category.name }}</label>
+
+                </li>
+            </ul>
+        </div>
+        <div class="col s12 m10">
+            <div ng-repeat="commerces in market.pack_commerces" class="row">
+                <div class="card col " style="width:30%;margin:1.5%;padding:0;" ng-repeat="commerce in commerces">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" ng-src="{{ market.MEDIA_URL }}{{ commerce.image }}" height="200px">
+                    </div>
+                    <div class="card-content" style="padding:0 0.75rem; padding-bottom:10px;">
+                        <span class="card-title activator grey-text text-darken-4" style="font-size:20px;">{{ commerce.name | limitTo: 25 }}<span ng-if="commerce.name.length > 25">...</span><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#modal{{ commerce.pk }}">Ver mas</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ commerce.name }}<i class="material-icons right">close</i></span>
+                        <p>{{ commerce.description }}</p>
+                    </div>
+                </div>
+
+            </div>
+            {% endverbatim %}
+        </div>
+    </div>
+</div>
+<script >
+$(document).ready(function(){
+
+    $('.modal').modal();
+
+});
+
+</script>
+{% endblock %}
