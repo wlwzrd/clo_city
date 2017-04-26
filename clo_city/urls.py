@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from map import views
+from sites import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^comuna/', include('map.urls')),
+    url(r'^comuna/', include('sites.urls')),
 ]
