@@ -25,7 +25,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['41ad9454.ngrok.io', "127.0.0.1"]
+ALLOWED_HOSTS = ['127.0.0.1']
+
 
 
 # Application definition
@@ -82,7 +83,7 @@ DATABASES = {
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_ADDR'),
-        'PORT': '5432',
+        'PORT': '',
     }
 }
 
@@ -123,6 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+STATIC_ROOT = '/opt/clo_sites/static/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -130,3 +132,4 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
+
