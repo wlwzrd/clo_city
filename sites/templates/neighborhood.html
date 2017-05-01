@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block extra_head %}
+<script src="/static/js/commerceMarket.js"></script>
+<script>
+var data = []; 
+var categories = [];
+var MEDIA_URL = "{{MEDIA_URL}}";
+var neighborhoods = [];
+{% for neighborhood in neighborhoods %}
+neighborhoods.push({
+        "pk" : "{{ neighborhood.pk }}",
+        "name" : "{{ neighborhood.name }}",
+        "image" : "{{ neighborhood.image }}",
+        "description" : "{{ neighborhood.description }}" 
+        });
+{% endfor %}
+</script>
+{% endblock %}
+{% block menu_items %}
+<div style="margin-left: 20%">
+    <a href="/">Home</a>
+    <a href="/neighborhoods">Barrios</a>
+</div>
+{% endblock %}
+{% block content %}
+{% verbatim %}
+<div class="col s12 m10">
+    <div ng-repeat="commerces in market.pack_neighborhoods" class="row">
+        <div class="card col " style="width:30%;margin:1.5%;padding:0;" ng-repeat="commerce in commerces">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" ng-src="{{ market.MEDIA_URL }}{{ commerce.image }}" height="200px">
+            </div>
+            <div class="card-content" style="padding:0 0.75rem; padding-bottom:10px;">
+                <span class="card-title activator grey-text text-darken-4" style="font-size:20px;">{{ commerce.name | limitTo: 25 }}<span ng-if="commerce.name.length > 25">...</span><i class="material-icons right">more_vert</i></span>
+                <p><a href="/comuna/{% endverbatim %}{{commune}}{% verbatim %}/barrio/{{ commerce.pk }}/">Ver negocios</a></p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{ commerce.name }}<i class="material-icons right">close</i></span>
+                <p>{{ commerce.description }}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endverbatim %}
+{% endblock %}

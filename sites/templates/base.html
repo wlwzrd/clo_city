@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title%}{% endblock %}</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<style>
+.modal.bottom-sheet {
+    max-height:60% !important;
+}
+</style>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+{% block extra_head %}{% endblock %}
+
+</head>
+<body ng-app="commerceMarket">
+ <div id="container" ng-controller="commerceMarketController as market">
+    <nav style="background-color:#555;">
+        <div class="nav-wrapper">
+            <a  href="#!" class="brand-logo" style="width:15% !important">Comuna 17</a>
+            {% block menu_items%}
+            {% endblock %}
+            {% block search %}
+            <!--
+            <form id="searchForm" class="" style="width: 85% !important; margin-left:15%;">
+                <div class="input-field">
+                    <input id="search" type="search" required ng-model="searchValue">
+                    <label for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>-->
+            {% endblock %}
+        </div>
+    </nav>
+    {% block  content %}
+    {% endblock %}
+
+</div>
+{% block extra_body %}
+{% endblock %}
+</body>
