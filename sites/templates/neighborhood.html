@@ -40,7 +40,7 @@ neighborhoods.push({
     <div ng-repeat="commerces in market.pack_neighborhoods" class="row">
         <div class="card col " style="width:30%;margin:1.5%;padding:0;" ng-repeat="commerce in commerces">
             <div class="card-image">
-              <img src="{{ commerce.image}}">
+              <img ng-src="{{ commerce.image}}">
               
             </div>
             <div class="card-content" style="padding:0 0.75rem; padding-bottom:10px;">
