@@ -36,7 +36,13 @@ categories.push({
         <div class="row">
             <div class="col m6">
                 <h4 style="text-align:center;">{{ commerce.name }}</h4>
-                <img src="{{MEDIA_URL}}{{commerce.image }}" alt="" height="200px" style="display:block;margin:0 auto;">
+                <!--<img src="{{MEDIA_URL}}{{commerce.image }}" alt="" height="200px" style="display:block;margin:0 auto;">-->
+                <div class="carousel">
+                    {% for image in commerce.siteimages_set.all %}
+                        <a class="carousel-item" href="#{{image.pk}}!"><img src="{{ MEDIA_URL }}{{ image.image.url }}"></a>
+                    {% endfor %}
+                </div>
+                
             </div>
             <div class="col m6">
                 <h4>Descripción:</h4>
@@ -92,6 +98,7 @@ categories.push({
 $(document).ready(function(){
 
     $('.modal').modal();
+    $('.carousel').carousel();
 
 });
 

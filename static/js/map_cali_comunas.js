@@ -1030,7 +1030,8 @@ for (var i = 0, len = zones.length; i <= len; i++) {
         this.animate({
             fill: 'green'
         }, 800);
-        window.location= "/comuna/" +this.data("id").split("a")[1]
+        //window.location= parseInt(this.data("id").split("a")[1]) == 17 ? "/comuna/" +this.data("id").split("a")[1] : "#";
+        window.location= parseInt(this.data("id").split("a")[1]) == 17 ? "/comuna/" +1 : "#";
     });
     
 

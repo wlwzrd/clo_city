@@ -8,12 +8,23 @@ var categories = [];
 var MEDIA_URL = "{{MEDIA_URL}}";
 var neighborhoods = [];
 {% for neighborhood in neighborhoods %}
+images = [];
+    {% for site in neighborhood.site_set.all %}
+        
+        {% for siteimage in site.siteimages_set.all  %}
+            
+            images.push("{{ MEDIA_URL }}{{siteimage.image.url }}");            
+        {% endfor %}
+    {% endfor %}
+random = Math.floor((Math.random() * images.length)+0);
 neighborhoods.push({
         "pk" : "{{ neighborhood.pk }}",
         "name" : "{{ neighborhood.name }}",
-        "image" : "{{ neighborhood.image }}",
-        "description" : "{{ neighborhood.description }}" 
+        "image" : images[random],
+        "description" : "{{ neighborhood.description }}",
+        
         });
+
 {% endfor %}
 </script>
 {% endblock %}
@@ -28,11 +39,13 @@ neighborhoods.push({
 <div class="col s12 m10">
     <div ng-repeat="commerces in market.pack_neighborhoods" class="row">
         <div class="card col " style="width:30%;margin:1.5%;padding:0;" ng-repeat="commerce in commerces">
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" ng-src="{{ market.MEDIA_URL }}{{ commerce.image }}" height="200px">
+            <div class="card-image">
+              <img src="{{ commerce.image}}">
+              
             </div>
             <div class="card-content" style="padding:0 0.75rem; padding-bottom:10px;">
-                <span class="card-title activator grey-text text-darken-4" style="font-size:20px;">{{ commerce.name | limitTo: 25 }}<span ng-if="commerce.name.length > 25">...</span><i class="material-icons right">more_vert</i></span>
+                <h3 class="card-title activator grey-text text-darken-4" style="font-size:20px;">{{ commerce.name | limitTo: 25 }}<span ng-if="commerce.name.length > 25">...</span><i class="material-icons right">more_vert</i></h3>
+
                 <p><a href="/comuna/{% endverbatim %}{{commune}}{% verbatim %}/barrio/{{ commerce.pk }}/">Ver negocios</a></p>
             </div>
             <div class="card-reveal">
@@ -44,4 +57,9 @@ neighborhoods.push({
     </div>
 </div>
 {% endverbatim %}
+<script>    
+    $(document).ready(function(){
+         $('.carousel').carousel();
+    })
+</script>
 {% endblock %}
