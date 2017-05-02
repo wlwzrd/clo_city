@@ -131,5 +131,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+MEDIA_ROOT = '/opt/clo_sites/'
 MEDIA_URL = '/media/'
 

@@ -11,7 +11,7 @@ data.push({
 name : "{{ commerce.name }}",
 pk : "{{ commerce.pk }}",
 description : `{{ commerce.description }}`,
-image : "{{ commerce.image }}",
+image : "{{ commerce.siteimages_set.last.image.url }}",
 category : "{{ commerce.category.pk}}",
 phone : "{{ commerce.phone }}"
 

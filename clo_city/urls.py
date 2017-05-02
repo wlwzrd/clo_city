@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from sites import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^comuna/', include('sites.urls')),
-]
+    url(r'^comuna/', include('sites.urls')), 
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
