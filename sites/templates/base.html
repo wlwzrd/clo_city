@@ -25,23 +25,12 @@
 </head>
 <body ng-app="commerceMarket">
  <div id="container" ng-controller="commerceMarketController as market">
-    <nav style="background-color:#555;">
-        <div class="nav-wrapper">
-            <a  href="#!" class="brand-logo" style="width:15% !important">Comuna 17</a>
-            {% block menu_items%}
-            {% endblock %}
-            {% block search %}
-            <!--
-            <form id="searchForm" class="" style="width: 85% !important; margin-left:15%;">
-                <div class="input-field">
-                    <input id="search" type="search" required ng-model="searchValue">
-                    <label for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                </div>
-            </form>-->
-            {% endblock %}
-        </div>
-    </nav>
+
+    <nav class="blue darken-3" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Comunas de Santiago de Cali</a>
+      
+    </div>
+  </nav>
     {% block  content %}
     {% endblock %}
 

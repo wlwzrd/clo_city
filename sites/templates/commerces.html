@@ -39,10 +39,10 @@ categories.push({
                 <!--<img src="{{MEDIA_URL}}{{commerce.image }}" alt="" height="200px" style="display:block;margin:0 auto;">-->
                 <div class="carousel">
                     {% for image in commerce.siteimages_set.all %}
-                        <a class="carousel-item" href="#{{image.pk}}!"><img src="{{ MEDIA_URL }}{{ image.image }}" alt="" height="200px" style="display:block;margin:0 auto;"></a>
+                        <a class="carousel-item" href="#{{image.pk}}!"><img src="{{ MEDIA_URL }}{{ image.image.url }}"></a>
                     {% endfor %}
                 </div>
-
+                
             </div>
             <div class="col m6">
                 <h4>Descripción:</h4>
